@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 
-#include <modern_cmake_library/logging/logging.hpp>
+#include <GraphLibrary/logging/logging.hpp>
 
-#include <modern_cmake_library/lib1/lib_example.hpp>
+#include <GraphLibrary/GraphLibrary.hpp>
 
 #include "test_logging.hpp"
 
-using modern_cmake_library::example;
+//using modern_cmake_library::example;
 
 namespace {
 // Install the per-test file logger once for the test binary.
@@ -16,7 +16,7 @@ namespace {
 }();
 }  // namespace
 
-TEST(ExampleTest, ExampleFunctionDoublesInput) {
+/*TEST(ExampleTest, ExampleFunctionDoublesInput) {
     example ex;
 
     LOGIFACE_LOG(info, "[ExampleFunctionDoublesInput] calling with 0");
@@ -46,4 +46,4 @@ TEST(ExampleTest, AnotherExampleFunctionSquaresPlusTen) {
 
     LOGIFACE_LOG(info, "[AnotherExampleFunctionSquaresPlusTen] calling with -4");
     EXPECT_EQ(ex.anotherExampleFunction(-4), 26);     // 16 (-4*-4) + 10
-}
+}*/

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <GraphLibrary/logging/logging.hpp>
+#include <GraphLibrary/logging/ConsoleLogger.hpp>
+
 #include <cstdlib>
 #include <filesystem>
 #include <fstream>
@@ -7,10 +10,6 @@
 #include <string>
 
 #include <gtest/gtest.h>
-
-#include <modern_cmake_library/logging/logging.hpp>
-
-#include "ostream_logger.hpp"
 
 namespace test_logging {
 
@@ -32,16 +31,16 @@ public:
         const std::string filename = std::string(info.test_suite_name()) + "_" + info.name() + ".txt";
         const auto filepath = dir / filename;
 
-        stream_.emplace(filepath);
+        stream_ = std::make_unique<std::ofstream>(filepath);
         if (!stream_->is_open()) {
             stream_.reset();
             active_ = false;
             return;
         }
 
-        logger_.emplace(*stream_);
+        logger_ = std::make_shared<::logiface::console_logger>(::logiface::level::debug, *stream_, *stream_);
         previous_logger_ = ::logiface::get_logger();
-        ::logiface::set_logger(&*logger_);
+        ::logiface::set_logger(logger_);
     }
 
     void OnTestEnd(const ::testing::TestInfo&) override {
@@ -64,9 +63,9 @@ private:
         return !ec;
     }
 
-    std::optional<std::ofstream> stream_{};
-    std::optional<::logiface::ostream_logger> logger_{};
-    ::logiface::logger* previous_logger_{nullptr};
+    std::unique_ptr<std::ofstream> stream_{};
+    std::shared_ptr<::logiface::console_logger> logger_{};
+    std::shared_ptr<::logiface::logger> previous_logger_{};
     bool active_{false};
 };
 

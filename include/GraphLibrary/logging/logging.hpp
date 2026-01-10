@@ -59,15 +59,15 @@ struct logger {
 
 // Global logger storage
 namespace detail {
-    inline std::shared_ptr<logger> g_logger{nullptr};
+    inline std::atomic<std::shared_ptr<logger>> g_logger{nullptr};
 }
 
 inline void set_logger(std::shared_ptr<logger> l) noexcept {
-    std::atomic_store_explicit(&detail::g_logger, l, std::memory_order_release);
+    detail::g_logger.store(l, std::memory_order_release);
 }
 
 inline std::shared_ptr<logger> get_logger() noexcept {
-    return std::atomic_load_explicit(&detail::g_logger, std::memory_order_acquire);
+    return detail::g_logger.load(std::memory_order_acquire);
 }
 
 #if LOGIFACE_ENABLE_LOGGING
@@ -103,26 +103,6 @@ inline std::shared_ptr<logger> get_logger() noexcept {
 // Optional helper macro to guard expensive expressions
 #define LOGIFACE_ENABLED(lvl) \
     (LOGIFACE_ENABLE_LOGGING && static_cast<int>(logiface::level::lvl) >= static_cast<int>(logiface::level::LOGIFACE_MIN_LEVEL))
-
-#ifdef LOGIFACE_ENABLE_DEFAULT_CONSOLE_LOGGER
-// Example thread-safe console logger
-struct console_logger : public logger {
-    explicit console_logger(level lvl = level::info) : lvl_(lvl) {}
-    void log(const record& r) override {
-        std::lock_guard<std::mutex> g(mutex_);
-        auto tt = std::chrono::system_clock::to_time_t(r.timestamp);
-        std::cerr << "[" << std::put_time(std::localtime(&tt), "%F %T") << "] "
-                  << to_string(r.lvl) << " "
-                  << "(" << r.file << ":" << r.line << "): "
-                  << r.message << '\n';
-    }
-    void set_level(level lvl) noexcept override { lvl_ = lvl; }
-    level get_level() const noexcept override { return lvl_; }
-private:
-    level lvl_;
-    std::mutex mutex_;
-};
-#endif // LOGIFACE_ENABLE_DEFAULT_CONSOLE_LOGGER
 
 } // namespace logiface
 

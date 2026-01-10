@@ -58,7 +58,7 @@ CheckOptions:
     value:  CamelCase
   - key:    readability-identifier-naming.EnumCase
     value:  CamelCase
-  - key:    readability-identifier-naming.EnumConstantCase # default case
+  - key:    readability-identifier-naming.EnumConstantCase
     value:  aNy_CasE
   - key:    readability-identifier-naming.ConstantCase
     value:  aNy_CasE

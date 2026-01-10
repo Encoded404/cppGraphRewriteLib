@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include <modern_cmake_library/logging/logging.hpp>
+#include <GraphLibrary/logging/logging.hpp>
 
 namespace logiface {
 
