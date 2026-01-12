@@ -11,7 +11,7 @@ namespace GraphLibrary
         typename NodeProperty,
         typename EdgeProperty
     >
-    class Graph
+    class Graph<NodeProperty, EdgeProperty>::Impl
     {
     public: using BoostGraphType = boost::adjacency_list<
                 boost::listS,
