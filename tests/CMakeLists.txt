@@ -5,7 +5,7 @@ add_executable(GraphLibraryTests simple_tests.cpp)
 find_package(GTest CONFIG REQUIRED)
 include(GoogleTest)
 target_link_libraries(GraphLibraryTests PRIVATE
-    cppGraphLibrary
+    GraphLibrary::GraphLibrary
     GTest::gtest
     GTest::gtest_main
 )

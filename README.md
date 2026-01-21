@@ -98,3 +98,14 @@ Public headers install to `include/modern_cmake_library/...`; adjust names/names
 ## Clang-Tidy
 
 Set `-DCLANG_TIDY_ENABLED=ON` (default) to enable static analysis when `clang-tidy` is found and a `.clang-tidy` file is present at the project root. Set it to `OFF` to skip configuring Clang-Tidy even if available.
+
+note: for clang tidy to be enabled clang need to be the compiler. this is because cmake passes stuff like gcc args to clang tidy which it doesnt recognize, if you are using LLVM 21.1.8+ you can add the following to the .clang-tidy file
+```
+RemovedArgs:
+  - '-fdeps-format'
+  - '-fmodule-mapper'
+  - '-fmodules-ts'
+```
+and remove the check for the compiler when enabling clang-tidy in the main CMakeLists.txt
+
+to use clang for compiling add this before your cmake -S . -B build call (delete the build dir if it exists): "CC=clang CXX=clang++". this requires you to have the clang dir in your PATH 

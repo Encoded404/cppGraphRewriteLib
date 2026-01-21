@@ -11,7 +11,7 @@
 
 #include <gtest/gtest.h>
 
-namespace test_logging {
+namespace TestLogging {
 
 // GTest listener that routes per-test logs to TEST_LOG_DIR/[suite]_[test].txt.
 class PerTestFileLogger final : public ::testing::EmptyTestEventListener {
@@ -23,7 +23,7 @@ public:
         }
 
         const std::filesystem::path dir(env);
-        active_ = ensure_directory(dir);
+        active_ = EnsureDirectory(dir);
         if (!active_) {
             return;
         }
@@ -38,14 +38,14 @@ public:
             return;
         }
 
-        logger_ = std::make_shared<::logiface::console_logger>(::logiface::level::debug, *stream_, *stream_);
-        previous_logger_ = ::logiface::get_logger();
-        ::logiface::set_logger(logger_);
+        logger_ = std::make_shared<::Logiface::ConsoleLogger>(::Logiface::Level::debug, *stream_, *stream_);
+        previous_logger_ = ::Logiface::GetLogger();
+        ::Logiface::SetLogger(logger_);
     }
 
     void OnTestEnd(const ::testing::TestInfo&) override {
         if (active_) {
-            ::logiface::set_logger(previous_logger_);
+            ::Logiface::SetLogger(previous_logger_);
         }
         logger_.reset();
         stream_.reset();
@@ -54,7 +54,7 @@ public:
     }
 
 private:
-    static bool ensure_directory(const std::filesystem::path& dir) {
+    static bool EnsureDirectory(const std::filesystem::path& dir) {
         std::error_code ec;
         if (std::filesystem::exists(dir, ec)) {
             return !ec;
@@ -64,17 +64,17 @@ private:
     }
 
     std::unique_ptr<std::ofstream> stream_{};
-    std::shared_ptr<::logiface::console_logger> logger_{};
-    std::shared_ptr<::logiface::logger> previous_logger_{};
+    std::shared_ptr<::Logiface::ConsoleLogger> logger_{};
+    std::shared_ptr<::Logiface::Logger> previous_logger_{};
     bool active_{false};
 };
 
 inline void InstallPerTestFileLogger() {
-    static bool installed = [] {
+    const static bool installed = [] {
         ::testing::UnitTest::GetInstance()->listeners().Append(new PerTestFileLogger{});
         return true;
     }();
     (void)installed;
 }
 
-}  // namespace test_logging
+}  // namespace TestLogging

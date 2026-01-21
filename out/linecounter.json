@@ -1,0 +1,425 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "/home/aronhoy/Documents/GitHub/cppGraphRewriteLib",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2026-01-20 11:11:38",
+            "filesum": 27,
+            "codesum": 1458,
+            "commentsum": 121,
+            "blanksum": 283,
+            "statistics": {
+                ".txt": {
+                    "code": 85,
+                    "comment": 0,
+                    "blank": 29
+                },
+                ".json": {
+                    "code": 96,
+                    "comment": 0,
+                    "blank": 0
+                },
+                "": {
+                    "code": 109,
+                    "comment": 0,
+                    "blank": 16
+                },
+                ".hpp": {
+                    "code": 1017,
+                    "comment": 83,
+                    "blank": 187
+                },
+                ".cmake": {
+                    "code": 5,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".cpp": {
+                    "code": 64,
+                    "comment": 37,
+                    "blank": 21
+                },
+                ".md": {
+                    "code": 82,
+                    "comment": 1,
+                    "blank": 29
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": ".clang-tidy"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".gitattributes"
+                },
+                {
+                    "blank": 6,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "cmake/ConfigureClangTidy.cmake"
+                },
+                {
+                    "blank": 10,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "CMakeLists.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 71,
+                    "comment": 0,
+                    "filename": "CMakePresets.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "examples/CMakeLists.txt"
+                },
+                {
+                    "blank": 3,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "examples/simpleExample/CMakeLists.txt"
+                },
+                {
+                    "blank": 15,
+                    "code": 54,
+                    "comment": 3,
+                    "filename": "examples/simpleExample/main.cpp"
+                },
+                {
+                    "blank": 8,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "include/CMakeLists.txt"
+                },
+                {
+                    "blank": 19,
+                    "code": 126,
+                    "comment": 10,
+                    "filename": "include/GraphLibrary/GraphLibrary.hpp"
+                },
+                {
+                    "blank": 26,
+                    "code": 154,
+                    "comment": 3,
+                    "filename": "include/GraphLibrary/Internal/Detail.hpp"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 2,
+                    "filename": "include/GraphLibrary/Internal/ForwardDeclarations.hpp"
+                },
+                {
+                    "blank": 40,
+                    "code": 252,
+                    "comment": 3,
+                    "filename": "include/GraphLibrary/Internal/GraphImpl.hpp"
+                },
+                {
+                    "blank": 5,
+                    "code": 37,
+                    "comment": 3,
+                    "filename": "include/GraphLibrary/logging/ConsoleLogger.hpp"
+                },
+                {
+                    "blank": 17,
+                    "code": 81,
+                    "comment": 11,
+                    "filename": "include/GraphLibrary/logging/logging.hpp"
+                },
+                {
+                    "blank": 37,
+                    "code": 191,
+                    "comment": 24,
+                    "filename": "include/GraphLibrary/Rule.hpp"
+                },
+                {
+                    "blank": 11,
+                    "code": 57,
+                    "comment": 16,
+                    "filename": "include/GraphLibrary/SparseVector.hpp"
+                },
+                {
+                    "blank": 4,
+                    "code": 7,
+                    "comment": 4,
+                    "filename": "include/GraphLibrary/TypeDefs.hpp"
+                },
+                {
+                    "blank": 4,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "LICENSE"
+                },
+                {
+                    "blank": 29,
+                    "code": 82,
+                    "comment": 1,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 8,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "tests/CMakeLists.txt"
+                },
+                {
+                    "blank": 9,
+                    "code": 35,
+                    "comment": 4,
+                    "filename": "tests/ostream_logger.hpp"
+                },
+                {
+                    "blank": 6,
+                    "code": 10,
+                    "comment": 34,
+                    "filename": "tests/simple_tests.cpp"
+                },
+                {
+                    "blank": 14,
+                    "code": 65,
+                    "comment": 3,
+                    "filename": "tests/test_logging.hpp"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "vcpkg-configuration.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "vcpkg.json"
+                }
+            ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2026-01-20 12:47:23",
+            "filesum": 27,
+            "codesum": 1613,
+            "commentsum": 131,
+            "blanksum": 311,
+            "statistics": {
+                "": {
+                    "code": 109,
+                    "comment": 0,
+                    "blank": 16
+                },
+                ".json": {
+                    "code": 96,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".md": {
+                    "code": 82,
+                    "comment": 1,
+                    "blank": 29
+                },
+                ".txt": {
+                    "code": 85,
+                    "comment": 0,
+                    "blank": 29
+                },
+                ".cmake": {
+                    "code": 5,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".cpp": {
+                    "code": 133,
+                    "comment": 44,
+                    "blank": 31
+                },
+                ".hpp": {
+                    "code": 1103,
+                    "comment": 86,
+                    "blank": 205
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": ".clang-tidy"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".gitattributes"
+                },
+                {
+                    "blank": 6,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "cmake/ConfigureClangTidy.cmake"
+                },
+                {
+                    "blank": 10,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "CMakeLists.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 71,
+                    "comment": 0,
+                    "filename": "CMakePresets.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "examples/CMakeLists.txt"
+                },
+                {
+                    "blank": 3,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "examples/simpleExample/CMakeLists.txt"
+                },
+                {
+                    "blank": 25,
+                    "code": 123,
+                    "comment": 10,
+                    "filename": "examples/simpleExample/main.cpp"
+                },
+                {
+                    "blank": 8,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "include/CMakeLists.txt"
+                },
+                {
+                    "blank": 19,
+                    "code": 121,
+                    "comment": 10,
+                    "filename": "include/GraphLibrary/GraphLibrary.hpp"
+                },
+                {
+                    "blank": 26,
+                    "code": 154,
+                    "comment": 3,
+                    "filename": "include/GraphLibrary/Internal/Detail.hpp"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 2,
+                    "filename": "include/GraphLibrary/Internal/ForwardDeclarations.hpp"
+                },
+                {
+                    "blank": 45,
+                    "code": 280,
+                    "comment": 6,
+                    "filename": "include/GraphLibrary/Internal/GraphImpl.hpp"
+                },
+                {
+                    "blank": 5,
+                    "code": 37,
+                    "comment": 3,
+                    "filename": "include/GraphLibrary/logging/ConsoleLogger.hpp"
+                },
+                {
+                    "blank": 17,
+                    "code": 81,
+                    "comment": 11,
+                    "filename": "include/GraphLibrary/logging/logging.hpp"
+                },
+                {
+                    "blank": 50,
+                    "code": 254,
+                    "comment": 24,
+                    "filename": "include/GraphLibrary/Rule.hpp"
+                },
+                {
+                    "blank": 11,
+                    "code": 57,
+                    "comment": 16,
+                    "filename": "include/GraphLibrary/SparseVector.hpp"
+                },
+                {
+                    "blank": 4,
+                    "code": 7,
+                    "comment": 4,
+                    "filename": "include/GraphLibrary/TypeDefs.hpp"
+                },
+                {
+                    "blank": 4,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "LICENSE"
+                },
+                {
+                    "blank": 29,
+                    "code": 82,
+                    "comment": 1,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 8,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "tests/CMakeLists.txt"
+                },
+                {
+                    "blank": 9,
+                    "code": 35,
+                    "comment": 4,
+                    "filename": "tests/ostream_logger.hpp"
+                },
+                {
+                    "blank": 6,
+                    "code": 10,
+                    "comment": 34,
+                    "filename": "tests/simple_tests.cpp"
+                },
+                {
+                    "blank": 14,
+                    "code": 65,
+                    "comment": 3,
+                    "filename": "tests/test_logging.hpp"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "vcpkg-configuration.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "vcpkg.json"
+                }
+            ]
+        }
+    ]
+}
