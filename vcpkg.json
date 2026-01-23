@@ -1,7 +1,7 @@
 {
-    "name": "modern-cmake-library-template",
-    "description": "A simple modern CMake library template",
-    "homepage": "https://github.com/Encoded404/CMakeTemplate",
+    "name": "cpp-graph-rewrite-lib",
+    "description": "A C++ library for graph rewriting.",
+    "homepage": "https://github.com/Encoded404/cppGraphRewriteLib",
     "version": "1.0.0",
     "license": "MIT",
     "dependencies": [
