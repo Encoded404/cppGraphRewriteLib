@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.14)
 # technically the only reason for this high of a cmake version is the policy for boost, it could be set some other way but i couldnt bother
 # nvm when this is a subdir it has to set the policy anyway to avoid warnings
-if(POLICY CMP0074)
-	message("CMake version is ${CMAKE_VERSION}, setting CMP0074 to NEW")
-	cmake_policy(SET CMP0074 NEW)
+if(POLICY CMP0167)
+	message("CMake version is ${CMAKE_VERSION}, setting CMP0167 to NEW")
+	cmake_policy(SET CMP0167 NEW)
 endif()
 
 # detect if this directory is the top-level project
