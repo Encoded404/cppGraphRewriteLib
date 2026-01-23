@@ -8,7 +8,9 @@ else()
     set(IS_TOP_PROJECT OFF)
 endif()
 
-project(cppGraphLibrary VERSION 1.0.0 LANGUAGES CXX)
+if(IS_TOP_PROJECT)
+	project(cppGraphLibrary VERSION 1.0.0 LANGUAGES CXX)
+endif()
 
 if(NOT DEFINED VCPKG_TARGET_TRIPLET)
     message(WARNING "vcpkg not detected; dependencies may fail")
