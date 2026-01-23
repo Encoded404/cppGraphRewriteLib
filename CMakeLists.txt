@@ -10,6 +10,8 @@ endif()
 
 if(IS_TOP_PROJECT)
 	project(cppGraphLibrary VERSION 1.0.0 LANGUAGES CXX)
+else()
+    message("project call skipped due to not being root cmake dir (cppGraphLibrary)")
 endif()
 
 if(NOT DEFINED VCPKG_TARGET_TRIPLET)
