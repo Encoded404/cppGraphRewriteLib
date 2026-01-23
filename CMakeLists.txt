@@ -1,5 +1,9 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.14)
 # technically the only reason for this high of a cmake version is the policy for boost, it could be set some other way but i couldnt bother
+# nvm when this is a subdir it has to set the policy anyway to avoid warnings
+if(CMAKE_VERSION VERSION_LESS "3.30.0" AND POLICY CMP0074)
+	cmake_policy(SET CMP0074 NEW)
+endif()
 
 # detect if this directory is the top-level project
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
@@ -8,11 +12,7 @@ else()
     set(IS_TOP_PROJECT OFF)
 endif()
 
-if(IS_TOP_PROJECT)
-	project(cppGraphLibrary VERSION 1.0.0 LANGUAGES CXX)
-else()
-    message("project call skipped due to not being root cmake dir (cppGraphLibrary)")
-endif()
+project(cppGraphLibrary VERSION 1.0.0 LANGUAGES CXX)
 
 if(NOT DEFINED VCPKG_TARGET_TRIPLET)
     message(WARNING "vcpkg not detected; dependencies may fail")
