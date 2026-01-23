@@ -14,7 +14,7 @@ if(NOT TARGET GraphLibrary::GraphLibrary)
 endif()
 
 # make anyone consuming the library link to boost graph as well
-find_package(Boost REQUIRED COMPONENTS graph)
+find_package(Boost REQUIRED COMPONENTS graph CONFIG)
 
 target_link_libraries(GraphLibrary INTERFACE Boost::graph)
 
