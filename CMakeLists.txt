@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.30)
 # technically the only reason for this high of a cmake version is the policy for boost, it could be set some other way but i couldnt bother
 
+# detect if this directory is the top-level project
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    set(IS_TOP_PROJECT ON)
+else()
+    set(IS_TOP_PROJECT OFF)
+endif()
+
 project(cppGraphLibrary VERSION 1.0.0 LANGUAGES CXX)
 
 if(NOT DEFINED VCPKG_TARGET_TRIPLET)
@@ -19,20 +26,24 @@ option(COMPILE_EXAMPLES "compile example binaries" ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # disable Clang-Tidy if not using Clang or GCC
-if(CLANG_TIDY_ENABLED AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-	set(CLANG_TIDY_ENABLED OFF)
-	message(WARNING "Clang-Tidy disabled: not using Clang compiler")
-endif()
-if(CLANG_TIDY_ENABLED)
-	include(ConfigureClangTidy)
+if(IS_TOP_PROJECT)
+	if(CLANG_TIDY_ENABLED AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+		set(CLANG_TIDY_ENABLED OFF)
+		message(WARNING "Clang-Tidy disabled: not using Clang compiler")
+	endif()
+	if(CLANG_TIDY_ENABLED)
+		include(ConfigureClangTidy)
+	endif()
 endif()
 
 add_subdirectory(include)
 
-if(BUILD_TESTING)
-	add_subdirectory(tests)
-endif()
+if(IS_TOP_PROJECT)
+	if(BUILD_TESTING)
+		add_subdirectory(tests)
+	endif()
 
-if(COMPILE_EXAMPLES)
-	add_subdirectory(examples)
+	if(COMPILE_EXAMPLES)
+		add_subdirectory(examples)
+	endif()
 endif()
