@@ -1,11 +1,12 @@
 #pragma once
 
-#include <GraphLibrary/logging/logging.hpp>
-#include <GraphLibrary/logging/ConsoleLogger.hpp>
+#include <logging/logging.hpp>
+#include <logging/ConsoleLogger.hpp>
 
 #include <cstdlib>
 #include <filesystem>
 #include <fstream>
+#include <memory>
 #include <optional>
 #include <string>
 
@@ -38,9 +39,9 @@ public:
             return;
         }
 
-        logger_ = std::make_shared<::Logiface::ConsoleLogger>(::Logiface::Level::debug, *stream_, *stream_);
+        logger_ = std::make_unique<::Logiface::ConsoleLogger>(::Logiface::Level::debug, *stream_, *stream_);
         previous_logger_ = ::Logiface::GetLogger();
-        ::Logiface::SetLogger(logger_);
+        ::Logiface::SetLogger(logger_.get());
     }
 
     void OnTestEnd(const ::testing::TestInfo&) override {
@@ -64,8 +65,8 @@ private:
     }
 
     std::unique_ptr<std::ofstream> stream_{};
-    std::shared_ptr<::Logiface::ConsoleLogger> logger_{};
-    std::shared_ptr<::Logiface::Logger> previous_logger_{};
+    std::unique_ptr<::Logiface::ConsoleLogger> logger_{};
+    ::Logiface::Logger* previous_logger_{nullptr};
     bool active_{false};
 };
 

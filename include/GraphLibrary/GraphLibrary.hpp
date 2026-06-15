@@ -3,6 +3,10 @@
 
 #include <GraphLibrary/TypeDefs.hpp>
 
+#ifndef GRAPHLIBRARY_LOGGING_ALREADY_IMPORTED
+#include <logging/logging.hpp>
+#endif
+
 // Forward declarations to avoid circular include with Rule.hpp
 namespace GraphLibrary {
     template<typename NodeProperty, typename EdgeProperty>
@@ -78,11 +82,13 @@ namespace GraphLibrary
         Vertex AddNode(const NodeProperty& property)
         {
             BoostVertexDescriptor desc = boost::add_vertex(property, boostGraph_);
+            LOGIFACE_LOG(trace, "AddNode(prop): total vertices = " + std::to_string(boost::num_vertices(boostGraph_)));
             return desc;
         }
         Vertex AddNode()
         {
             BoostVertexDescriptor desc = boost::add_vertex(boostGraph_);
+            LOGIFACE_LOG(trace, "AddNode(): total vertices = " + std::to_string(boost::num_vertices(boostGraph_)));
             return desc;
         }
 
@@ -92,6 +98,7 @@ namespace GraphLibrary
             const EdgeProperty& property)
         {
             auto e_pair = boost::add_edge(u, v, property, boostGraph_);
+            LOGIFACE_LOG(trace, "AddEdge(prop): added=" + std::string(e_pair.second ? "true" : "false") + ", total edges = " + std::to_string(boost::num_edges(boostGraph_)));
             return e_pair.first; // first is the edge descriptor second is a bool indicating if it was added or already existed
         }
         Edge AddEdge(
@@ -99,18 +106,21 @@ namespace GraphLibrary
             Vertex v)
         {
             auto e_pair = boost::add_edge(u, v, boostGraph_);
+            LOGIFACE_LOG(trace, "AddEdge(): added=" + std::string(e_pair.second ? "true" : "false") + ", total edges = " + std::to_string(boost::num_edges(boostGraph_)));
             return e_pair.first; // first is the edge descriptor second is a bool indicating if it was added or already existed
         }
 
         /// @brief Remove an edge by descriptor from the underlying boost graph.
         void RemoveEdge(Edge e)
         {
+            LOGIFACE_LOG(trace, "RemoveEdge: total edges before = " + std::to_string(boost::num_edges(boostGraph_)));
             boost::remove_edge(e, boostGraph_);
         }
 
         /// @brief Remove a vertex (and all incident edges) by descriptor from the underlying boost graph.
         void RemoveNode(Vertex v)
         {
+            LOGIFACE_LOG(trace, "RemoveNode: total vertices before = " + std::to_string(boost::num_vertices(boostGraph_)));
             boost::clear_vertex(v, boostGraph_);
             boost::remove_vertex(v, boostGraph_);
         }

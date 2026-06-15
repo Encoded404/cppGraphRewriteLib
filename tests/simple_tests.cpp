@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
-#include <GraphLibrary/logging/logging.hpp>
+#include <logging/logging.hpp>
+#include <logging/logging_macros.hpp>
 
 #include <GraphLibrary/GraphLibrary.hpp>
 #include <GraphLibrary/Rule.hpp>

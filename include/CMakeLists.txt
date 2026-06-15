@@ -6,6 +6,7 @@ add_library(GraphLibrary INTERFACE)
 target_include_directories(GraphLibrary INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   $<INSTALL_INTERFACE:include>
+  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/external/cppLoggingInterface/include>
 )
 
 # Provide an alias for nicer namespacing

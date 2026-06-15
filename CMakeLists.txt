@@ -1,4 +1,17 @@
-cmake_minimum_required(VERSION 3.14)
+if(LOGIFACE_USE_STD_MODULE)
+	cmake_minimum_required(VERSION 3.30)
+
+	if( NOT CMAKE_EXPERIMENTAL_CXX_IMPORT_STD )
+		if( ${CMAKE_VERSION} VERSION_GREATER_EQUAL 4.3 )
+			set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD 451f2fe2-a8a2-47c3-bc32-94786d8fc91b)
+		elseif( ${CMAKE_VERSION} VERSION_GREATER_EQUAL 3.30 )
+			set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "d0edc3af-4c50-42ea-a356-e2862fe7a444")
+		endif ()
+	endif ()
+else ()
+	cmake_minimum_required(VERSION 3.14)
+endif ()
+
 # technically the only reason for this high of a cmake version is the policy for boost, it could be set some other way but i couldnt bother
 # nvm when this is a subdir it has to set the policy anyway to avoid warnings
 if(POLICY CMP0167)
@@ -24,7 +37,6 @@ include(CTest)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 option(CLANG_TIDY_ENABLED "Enable Clang-Tidy static analysis" ON)
-option(ENABLE_LOGGING "Enable header-only logging interface" ON)
 
 option(COMPILE_EXAMPLES "compile example binaries" ON)
 
@@ -42,6 +54,13 @@ if(IS_TOP_PROJECT)
 endif()
 
 add_subdirectory(include)
+
+option(GRAPHLIBRARY_BUILD_MODULE "Build GraphLibrary as a C++23 module" OFF)
+option(GRAPHLIBRARY_USE_STD_MODULE "Use import std; instead of #include headers in the GraphLibrary module" OFF)
+
+if(GRAPHLIBRARY_BUILD_MODULE)
+    add_subdirectory(src)
+endif()
 
 if(IS_TOP_PROJECT)
 	if(BUILD_TESTING)

@@ -63,6 +63,8 @@ namespace GraphLibrary
             vertex_order,
             Detail::EdgeComparator<NodeProperty, EdgeProperty>(pattern_boost, target_graph, &rule),
             Detail::NodeComparator<NodeProperty, EdgeProperty>(pattern_boost, target_graph, &rule));
+
+        LOGIFACE_LOG(debug, "CollectMatches: found " + std::to_string(matches.size()) + " match(es)");
         return matches;
     }
 
@@ -122,6 +124,7 @@ namespace GraphLibrary
                 filtered.push_back(match);
             }
         }
+        LOGIFACE_LOG(debug, "RemoveOverlappingMatches: " + std::to_string(matches.size()) + " -> " + std::to_string(filtered.size()) + " non-overlapping");
         return filtered;
     }
 
@@ -230,6 +233,7 @@ namespace GraphLibrary
                 filtered.push_back(match);
             }
         }
+        LOGIFACE_LOG(debug, "FilterMatchesByConstraints: " + std::to_string(matches.size()) + " -> " + std::to_string(filtered.size()) + " valid");
         return filtered;
     }
 
@@ -258,6 +262,8 @@ namespace GraphLibrary
     {
         const auto& rhs_graph = rule.GetRGraph();
         const auto& rhs_impl_boost = rhs_graph.GetInternalGraph();
+
+        LOGIFACE_LOG(debug, "ApplyMatches: applying " + std::to_string(matches.size()) + " match(es) to host graph");
 
         for (const auto& match : matches)
         {
@@ -337,8 +343,17 @@ namespace GraphLibrary
         BoostGraphType& graph) const
     {
         const std::vector<Detail::MatchResult<NodeProperty, EdgeProperty>> matches = CollectMatches(rule, graph);
+
+        LOGIFACE_LOG(trace, "ApplyRuleInternal: " + std::to_string(matches.size()) + " raw matches");
+
         const std::vector<Detail::MatchResult<NodeProperty, EdgeProperty>> non_overlapping = RemoveOverlappingMatches(matches, rule);
+
+        LOGIFACE_LOG(trace, "ApplyRuleInternal: " + std::to_string(non_overlapping.size()) + " non-overlapping matches");
+
         const std::vector<Detail::MatchResult<NodeProperty, EdgeProperty>> valid_matches = FilterMatchesByConstraints(non_overlapping, rule, graph);
+
+        LOGIFACE_LOG(trace, "ApplyRuleInternal: " + std::to_string(valid_matches.size()) + " valid matches to apply");
+
         ApplyMatches(graph, valid_matches, rule);
         return graph;
     }
@@ -351,6 +366,8 @@ namespace GraphLibrary
 
         Graph<NodeProperty, EdgeProperty> result;
         result.GetInternalGraph() = std::move(working_graph);
+
+        LOGIFACE_LOG(debug, "ApplyRule: result has " + std::to_string(result.GetVertices().size()) + " vertices, " + std::to_string(result.GetEdges().size()) + " edges");
         return result;
     }
 
@@ -366,6 +383,8 @@ namespace GraphLibrary
 
         Graph<NodeProperty, EdgeProperty> result;
         result.GetInternalGraph() = std::move(working_graph);
+
+        LOGIFACE_LOG(debug, "ApplyRuleSet (" + std::to_string(rule_set.Size()) + " rules): result has " + std::to_string(result.GetVertices().size()) + " vertices, " + std::to_string(result.GetEdges().size()) + " edges");
         return result;
     }
 
@@ -374,8 +393,10 @@ namespace GraphLibrary
     {
         BoostGraphType working_graph = boostGraph_;
 
+        std::size_t total_rules = 0;
         for (const auto& set : rule_sets)
         {
+            total_rules += set.Size();
             for (const auto& rptr : set.GetRules())
             {
                 ApplyRuleInternal(*rptr, working_graph);
@@ -384,6 +405,8 @@ namespace GraphLibrary
 
         Graph<NodeProperty, EdgeProperty> result;
         result.GetInternalGraph() = std::move(working_graph);
+
+        LOGIFACE_LOG(debug, "ApplyRuleSets (" + std::to_string(rule_sets.size()) + " sets, " + std::to_string(total_rules) + " rules): result has " + std::to_string(result.GetVertices().size()) + " vertices, " + std::to_string(result.GetEdges().size()) + " edges");
         return result;
     }
 } // namespace GraphLibrary

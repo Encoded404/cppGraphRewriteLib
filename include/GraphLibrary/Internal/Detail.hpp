@@ -117,6 +117,7 @@ namespace GraphLibrary::Detail
                 }
             }
 
+            LOGIFACE_LOG(trace, "MatchCollector: VF2 found a match with " + std::to_string(match.vertices.size()) + " vertices, " + std::to_string(match.edges.size()) + " edges");
             matches_.push_back(std::move(match));
             return true;
         }

@@ -160,7 +160,9 @@ namespace GraphLibrary
         int AddNodeConstraint(std::shared_ptr<NodeConstraintBase> constraint)
         {
             node_constraints_.push_back(std::move(constraint));
-            return static_cast<int>(node_constraints_.size() - 1);
+            const int idx = static_cast<int>(node_constraints_.size() - 1);
+            LOGIFACE_LOG(debug, "Rule: added node constraint at index " + std::to_string(idx));
+            return idx;
         }
 
         void RemoveNodeConstraint(int index)
@@ -168,13 +170,16 @@ namespace GraphLibrary
             if (index >= 0 && static_cast<size_t>(index) < node_constraints_.size())
             {
                 node_constraints_.erase(node_constraints_.begin() + index);
+                LOGIFACE_LOG(debug, "Rule: removed node constraint at index " + std::to_string(index));
             }
         }
 
         int AddEdgeConstraint(std::shared_ptr<EdgeConstraintBase> constraint)
         {
             edge_constraints_.push_back(std::move(constraint));
-            return static_cast<int>(edge_constraints_.size() - 1);
+            int idx = static_cast<int>(edge_constraints_.size() - 1);
+            LOGIFACE_LOG(debug, "Rule: added edge constraint at index " + std::to_string(idx));
+            return idx;
         }
 
         void RemoveEdgeConstraint(int index)
@@ -182,6 +187,7 @@ namespace GraphLibrary
             if (index >= 0 && static_cast<size_t>(index) < edge_constraints_.size())
             {
                 edge_constraints_.erase(edge_constraints_.begin() + index);
+                LOGIFACE_LOG(debug, "Rule: removed edge constraint at index " + std::to_string(index));
             }
         }
 
@@ -193,6 +199,7 @@ namespace GraphLibrary
             auto it = std::find_if(nodePredicates_.begin(), nodePredicates_.end(), [&desc](const auto& e){ return e.first == desc; });
             if (it != nodePredicates_.end()) it->second = std::move(pred);
             else nodePredicates_.emplace_back(desc, std::move(pred));
+            LOGIFACE_LOG(debug, "Rule: set node predicate for vertex");
         }
 
         void SetEdgePredicate(BoostEdgeDescriptor desc, EdgePred pred)
@@ -200,6 +207,7 @@ namespace GraphLibrary
             auto it = std::find_if(edgePredicates_.begin(), edgePredicates_.end(), [&desc](const auto& e){ return e.first == desc; });
             if (it != edgePredicates_.end()) it->second = std::move(pred);
             else edgePredicates_.emplace_back(desc, std::move(pred));
+            LOGIFACE_LOG(debug, "Rule: set edge predicate for edge");
         }
 
         bool HasNodePredicate(BoostVertexDescriptor desc) const
@@ -260,6 +268,8 @@ namespace GraphLibrary
             {
                 modifiedNodes_.emplace_back(l_desc, is_modified);
             }
+
+            LOGIFACE_LOG(debug, "Rule: linked L-node -> R-node (modified=" + std::string(is_modified ? "true" : "false") + ")");
         }
 
         void LinkEdges(BoostEdgeDescriptor l_desc, BoostEdgeDescriptor r_desc)
@@ -296,6 +306,8 @@ namespace GraphLibrary
             {
                 modifiedEdges_.emplace_back(l_desc, is_modified);
             }
+
+            LOGIFACE_LOG(debug, "Rule: linked L-edge -> R-edge (modified=" + std::string(is_modified ? "true" : "false") + ")");
         }
 
         bool HasEdgeMapping(BoostEdgeDescriptor descriptor) const
